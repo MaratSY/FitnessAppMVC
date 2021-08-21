@@ -13,13 +13,19 @@ namespace FitnessAppMVC.Models.Workout
 
         public Enum WorkoutType { get; set; }
 
-        public List<Exercise> ListOfExercises { get; set; }
+        public List<Exercise> Exercises { get; set; }
+    }
+
+    // many-to-many
+    public class WorkoutExercise 
+    {
+
     }
 
     public enum WorkoutType
     {
-        Aerobic,
-        Anaerobic,
-        StretchingAndFlexibility
+        Aerobic = 0,
+        Anaerobic = 1,
+        StretchingAndFlexibility = 2
     }
 }

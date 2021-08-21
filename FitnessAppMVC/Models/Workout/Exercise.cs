@@ -14,5 +14,7 @@ namespace FitnessAppMVC.Models.Workout
         public ExerciseType ExerciseType { get; set; }
 
         public Enum WorkoutType { get; set; }
+
+        // link to creator
     }
 }
