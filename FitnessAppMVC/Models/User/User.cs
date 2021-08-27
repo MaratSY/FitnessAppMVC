@@ -19,5 +19,7 @@ namespace FitnessAppMVC.Models
         public byte Weight { get; set; }
 
         public byte Age { get; set; }
+
+        public string PasswordHash { get; set; }
     }
 }

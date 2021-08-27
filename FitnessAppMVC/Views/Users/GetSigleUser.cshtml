@@ -1,0 +1,29 @@
+﻿
+@using FitnessAppMVC.ViewModels.Users
+@{
+    @model GetSigleUserViewModel
+    ViewData["Title"] = "GetUser";
+}
+
+@if (Model.User == null)
+{
+    <div>Такого пользователя нет</div>
+}
+else
+{
+    <div class="row mb-3 mt-3">
+        <div class="col-12">
+            Информация о пользователе @Model.User.UserName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div>Имя пользователя: @Model.User.UserName</div>
+                <div>Email: @Model.User.Email</div>
+            </div>
+        </div>
+    </div>
+}
+

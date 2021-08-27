@@ -1,0 +1,13 @@
+﻿@model FitnessAppMVC.ViewModels.Users.GetUserListViewModel
+
+
+@foreach (var user in Model.Users)
+{
+    <div>-----------</div>
+    <div>
+        @user.Id
+    </div>
+    <div>
+        @user.UserName
+    </div>
+}

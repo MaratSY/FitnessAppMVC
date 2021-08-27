@@ -1,9 +1,6 @@
-﻿using FitnessAppMVC.Data;
+﻿using FitnessAppMVC.Managers;
+using FitnessAppMVC.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessAppMVC.Controllers
@@ -12,23 +9,40 @@ namespace FitnessAppMVC.Controllers
     [Route("users")]
     public class UsersController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IUserManager _userManager;
 
         public UsersController(
-            ApplicationDbContext dbContext
+            IUserManager userManager
             )
         {
-            _dbContext = dbContext;
+            _userManager = userManager;
         }
+
 
         [HttpGet("{id}")]
         //[AllowAnonymous]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> GetSigleUser(string id)
         {
-            var user = await _dbContext.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
-            //return Json(user);
+            var user = await _userManager.GetSingleUserById(id);
+            var userViewModel = new GetSigleUserViewModel
+            {
+                User = user
+            };
 
-            return View("GetUser", user);
+            return View("GetSigleUser", userViewModel);
+        }
+
+
+        [HttpGet("")]
+        public async Task<IActionResult> GetUserList()
+        {
+            var users = await _userManager.GetListOfUsers();
+            var usersViewModel = new GetUserListViewModel
+            {
+                Users = users
+            };
+
+            return View("GetUserList", usersViewModel);
         }
     }
 }

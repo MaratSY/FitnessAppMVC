@@ -14,6 +14,6 @@ namespace FitnessAppMVC.Data
         {
         }
 
-
+        public DbSet<User> AppUsers { get; set; }
     }
 }
