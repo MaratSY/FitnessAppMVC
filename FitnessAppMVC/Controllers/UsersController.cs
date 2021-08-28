@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace FitnessAppMVC.Controllers
 {
-    [ApiController]
-    [Route("users")]
+    [ApiController]     // ApiController должен содержать роуты и будет мапить по аттрибутам Route в контроллере и template в методах
+    [Route("users")]    // нужен для ApiController
+
+    //[Controller]      // Controller мапится по имени контроллеров и методов
     public class UsersController : Controller
     {
         private readonly IUserManager _userManager;
@@ -19,8 +21,8 @@ namespace FitnessAppMVC.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        //[AllowAnonymous]
+        [HttpGet("{id}")]   // для ApiController
+        //[HttpGet]         // для Controller
         public async Task<IActionResult> GetSigleUser(string id)
         {
             var user = await _userManager.GetSingleUserById(id);
@@ -33,7 +35,8 @@ namespace FitnessAppMVC.Controllers
         }
 
 
-        [HttpGet("")]
+        [HttpGet("")]   // для ApiController
+        //[HttpGet]     // для Controller
         public async Task<IActionResult> GetUserList()
         {
             var users = await _userManager.GetListOfUsers();

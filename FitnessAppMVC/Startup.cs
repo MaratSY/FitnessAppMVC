@@ -26,27 +26,36 @@ namespace FitnessAppMVC
 
         public IConfiguration Configuration { get; }
 
+
+
+        //https://metanit.com/sharp/aspnet5/6.1.php
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // register DB context
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
+            // register UserManager<User> - one instance per request
             services.AddScoped<UserManager<User>>();
+
             services.AddScoped<IUserManager, UserManager>();
 
+            // info about BD errors
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            // register Identity
             services.AddDefaultIdentity<User>(options =>
                 {
-                options.SignIn.RequireConfirmedAccount = true;
-
+                    // all rules for login
+                    options.SignIn.RequireConfirmedAccount = true;
                 })
                 .AddRoles<IdentityRole>()
+                // add user store
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+            // register MVC fro working with controllers and views
             services.AddControllersWithViews();
         }
 
@@ -56,14 +65,22 @@ namespace FitnessAppMVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+
+                // migration by http
+                //app.UseMigrationsEndPoint(new MigrationsEndPointOptions 
+                //{
+                //    Path = ""
+                //});
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+                //https://metanit.com/sharp/aspnet5/18.6.php
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

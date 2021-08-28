@@ -1,4 +1,5 @@
 ﻿using FitnessAppMVC.Models;
+using FitnessAppMVC.Models.Workout;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,5 +16,6 @@ namespace FitnessAppMVC.Data
         }
 
         public DbSet<User> AppUsers { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
     }
 }

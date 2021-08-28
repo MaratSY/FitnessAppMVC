@@ -27,7 +27,10 @@ namespace FitnessAppMVC.Managers
         {
             var user = await _dbContext.AppUsers.FirstOrDefaultAsync(u => u.Id == id);
 
+            // AsNoTracking
+
             //TODO: вынести в маппер
+            // https://metanit.com/sharp/mvc5/23.4.php
             return new UserDto
             {
                 Email = user.Email,
@@ -41,6 +44,7 @@ namespace FitnessAppMVC.Managers
             var users = await _dbContext.AppUsers.ToListAsync();
 
             // какой принцип тут нарушен?
+            // https://metanit.com/sharp/mvc5/23.4.php
             return users.Select(u => new UserDto
             {
                 Email = u.Email,

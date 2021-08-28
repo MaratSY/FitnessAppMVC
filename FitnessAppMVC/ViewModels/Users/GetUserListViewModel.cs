@@ -1,4 +1,4 @@
-﻿using FitnessAppMVC.Dto;
+using FitnessAppMVC.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
